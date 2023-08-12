@@ -1,0 +1,52 @@
+# main.py
+import random
+print("Welcome to wordle, in wordle you have to guess the wordle in six tries. The wordle is a 5 letter word. After each guess the word you entered will change accordingly to position in the wordle. for example a capital letter is in the word and in the correct spot. Example: phOne. A letter in parentheses means the word is in the wordle but is not in the correct place. Example: wor(d)s")
+#list of possible wordles
+possibleWordles = ["blast", "phone", "eager", "stove", "fleet", "treat", "crule", "train", "hacks", "royal, xylyl, knoll, deity, brink, diddo, brick, parks, tower, crown, ditch, crane, "]
+
+while True:
+  locations = ""
+  # assign a random wordle
+  wordle = possibleWordles[random.randint(0,len(possibleWordles)-1)]
+  tries = 0
+  guess = ""
+  # repeat game loop until the user gets the wordle or their 6 tries are over
+  while guess != wordle and tries <= 5: 
+    # ask user to guess a 5 letter word
+    guess = input("Guess a 5 letter word all lowercase: ")
+    while len(guess) != 5:
+      # check if word is 5 letters 
+      if len(guess) < 5:
+        print("too short!")
+        guess = input("Guess a 5 letter word all lowercase: ")  
+      elif len(guess) > 5:
+        print("too long")
+        guess = input("Guess a 5 letter word all lowercase: ")
+       
+       
+    for i in range(len(guess)):
+      if guess[i] in wordle:
+         # check if letters are in their correct position
+        if guess[i] == wordle[i]:
+          locations += guess[i].upper()
+        else:
+           # check if letters are in the word and indicate if they are in the word. (may not be in right place)
+          locations += "(" + guess[i] + ")"
+      else:
+        locations += (guess[i])
+    tries += 1 
+    print("You are on try " + str(tries))
+    print(locations)    
+    locations = ""
+  if guess == wordle:
+    # check if they got the wordle 
+    print("You got the wordle!")
+  else:# if they do not get the wordle tell them the wordle
+    print("you ran out of guesses ):")
+    # if they do not get the wordle tell them the wordle
+    print("The wordle was... " + wordle)
+    # ask them if they want to play wordle again(repeat steps 2-10).
+  playAgain = input("Would you like to play again? Y or N: ")  
+  if playAgain == "N":
+    break
+  stillPlaying = True
